@@ -1,0 +1,11 @@
+framework module DPSDK {
+  umbrella header "DPSDK.h"
+
+  export *
+  module * { export * }
+}
+
+module DPSDK.Swift {
+    header "DPSDK-Swift.h"
+    requires objc
+}

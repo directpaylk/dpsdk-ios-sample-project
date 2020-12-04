@@ -1,0 +1,245 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)
+// swift-module-flags: -target armv7-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name DPSDK
+@_exported import DPSDK
+import Foundation
+import Swift
+import UIKit
+import WebKit
+@_hasMissingDesignatedInitializers open class DirectPay {
+  @objc deinit
+}
+public enum GatewayResult<T> {
+  case success(T)
+  case error(Swift.Error)
+  public init(_ result: T)
+  public init(_ result: Swift.Error)
+}
+public enum GatewayRegion : Swift.String {
+  case asiaPacific
+  case europe
+  case northAmerica
+  case mtf
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers open class RecurringPaymentInfo {
+  open var amount: Swift.Double
+  open var cardMask: Swift.String
+  open var dateTime: Swift.String
+  open var description: Swift.String
+  open var reference: Swift.String
+  open var transactionId: Swift.Int
+  open var status: Swift.String
+  open var doFirstPayment: Swift.Bool
+  open var interval: Swift.String
+  open var isRetry: Swift.Bool
+  open var lastDate: Swift.String
+  open var nextPaymentDate: Swift.String
+  open var retryAttempts: Swift.Int
+  open var startingDate: Swift.String
+  open var scheduledId: Swift.Int
+  @objc deinit
+}
+public enum Gateway3DSecureResult {
+  case completed(gatewayResult: DPSDK.GatewayMap)
+  case error(DPSDK.Gateway3DSecureError)
+  case cancelled
+}
+public enum Gateway3DSecureError : Swift.Error {
+  case missingGatewayResponse
+  case mappingError
+  public static func == (a: DPSDK.Gateway3DSecureError, b: DPSDK.Gateway3DSecureError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@objc @_inheritsConvenienceInitializers public class Gateway3DSecureViewController : UIKit.UIViewController, WebKit.WKNavigationDelegate {
+  public var navBar: UIKit.UINavigationBar!
+  public var cancelButton: UIKit.UIBarButtonItem!
+  public var activityIndicator: UIKit.UIActivityIndicatorView!
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder aDecoder: Foundation.NSCoder)
+  public func authenticatePayer(htmlBodyContent: Swift.String, handler: @escaping (DPSDK.Gateway3DSecureViewController, DPSDK.Gateway3DSecureResult) -> Swift.Void)
+  @objc public func webView(_ webView: WebKit.WKWebView, didStartProvisionalNavigation navigation: WebKit.WKNavigation!)
+  @objc public func webView(_ webView: WebKit.WKWebView, didFinish navigation: WebKit.WKNavigation!)
+  @objc public func webView(_ webView: WebKit.WKWebView, decidePolicyFor navigationAction: WebKit.WKNavigationAction, decisionHandler: @escaping (WebKit.WKNavigationActionPolicy) -> Swift.Void)
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class Card {
+  open var brand: Swift.String
+  open var id: Swift.Int
+  open var mask: Swift.String
+  open var reference: Swift.String
+  @objc deinit
+}
+final public class SHA256 {
+  public init(_ input: [Swift.UInt8])
+  public init(_ string: Swift.String)
+  final public func digestString() -> Swift.String
+  final public func digest() -> [Swift.UInt8]
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class PaymentInfo {
+  open var amount: Swift.Double
+  open var cardMask: Swift.String
+  open var dateTime: Swift.String
+  open var description: Swift.String
+  open var reference: Swift.String
+  open var transactionId: Swift.Int
+  open var status: Swift.String
+  @objc deinit
+}
+open class DPPayment {
+  open var reference: Swift.String
+  open var cardId: Swift.Int
+  open var amount: Swift.Double
+  open var currency: Swift.String
+  public init()
+  @objc deinit
+}
+public enum WarningLevel : Swift.String {
+  case error
+  case warning
+  case info
+  case debug
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@_inheritsConvenienceInitializers open class RPayment : DPSDK.DPPayment {
+  open var interval: Swift.String
+  open var startPaymentDate: Swift.String
+  open var retryAttempts: Swift.Int
+  open var isRetry: Swift.Bool
+  open var doFirstPayment: Swift.Bool
+  open var lastPaymentDate: Swift.String
+  @objc deinit
+  override public init()
+}
+public enum HTTPMethod : Swift.String {
+  case get
+  case put
+  case post
+  case delete
+  case head
+  case trace
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct GatewayMap {
+  public enum DecodingError : Swift.Error {
+    case invalidData([Swift.CodingKey])
+  }
+  public init()
+  public init(_ dictionary: [Swift.String : Any])
+  public var dictionary: [Swift.String : Any] {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+  public subscript(key: Swift.String) -> Any? {
+    get
+    set(newValue)
+  }
+  public subscript(at path: Swift.String) -> Any? {
+    get
+    set(newValue)
+  }
+}
+extension GatewayMap : Swift.ExpressibleByDictionaryLiteral {
+  public init(dictionaryLiteral elements: (Swift.String, Any)...)
+  public typealias Key = Swift.String
+  public typealias Value = Any
+}
+extension GatewayMap : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+extension GatewayMap : Swift.Equatable {
+  public static func == (lhs: DPSDK.GatewayMap, rhs: DPSDK.GatewayMap) -> Swift.Bool
+}
+extension GatewayMap : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+@_inheritsConvenienceInitializers open class OTPayment : DPSDK.DPPayment {
+  open var paymentType: Swift.String
+  open var payeeId: Swift.String
+  override public init()
+  @objc deinit
+}
+extension Gateway : Foundation.URLSessionDelegate {
+  @objc dynamic public func urlSession(_ session: Foundation.URLSession, didReceive challenge: Foundation.URLAuthenticationChallenge, completionHandler: @escaping (Foundation.URLSession.AuthChallengeDisposition, Foundation.URLCredential?) -> Swift.Void)
+}
+open class DPSDK {
+  public struct PAYMENT_TYPE {
+    public static let USER_PAYMENT: Swift.String
+    public static let DRIVER_PAYMENT: Swift.String
+  }
+  public struct CURRENCY {
+    public static let LKR: Swift.String
+    public static let USD: Swift.String
+  }
+  public struct INTERVAL {
+    public static let DAILY: Swift.String
+    public static let WEEKLY: Swift.String
+    public static let MONTHLY: Swift.String
+    public static let QUARTERLY: Swift.String
+    public static let YEARLY: Swift.String
+  }
+  public init(apiKey: Swift.String, dpMerchantId: Swift.String, uniqueUserId: Swift.String, userName: Swift.String, mobile: Swift.String, email: Swift.String?)
+  public func addCard(_ viewController: UIKit.UIViewController, success: @escaping (DPSDK.Card) -> (), error: @escaping (Swift.String, Swift.String) -> ())
+  public func removeCard(_ cardId: Swift.Int, success: @escaping () -> (), error: @escaping (Swift.String, Swift.String) -> ())
+  public func cardList(success: @escaping ([DPSDK.Card]) -> (), error: @escaping (Swift.String, Swift.String) -> ())
+  @objc deinit
+}
+public protocol JSONEncoderProtocol {
+  func encode<T>(_ value: T) throws -> Foundation.Data where T : Swift.Encodable
+}
+extension JSONEncoder : DPSDK.JSONEncoderProtocol {
+}
+public protocol JSONDecoderProtocol {
+  func decode<T>(_ type: T.Type, from data: Foundation.Data) throws -> T where T : Swift.Decodable
+}
+extension JSONDecoder : DPSDK.JSONDecoderProtocol {
+}
+@objc public class Gateway : ObjectiveC.NSObject {
+  final public let region: DPSDK.GatewayRegion
+  final public let merchantId: Swift.String
+  public init(region: DPSDK.GatewayRegion, merchantId: Swift.String)
+  @discardableResult
+  public func updateSession(_ session: Swift.String, apiVersion: Swift.String, payload: DPSDK.GatewayMap, completion: @escaping (DPSDK.GatewayResult<DPSDK.GatewayMap>) -> Swift.Void) -> Foundation.URLSessionTask?
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum GatewayError : Swift.Error, Swift.CustomStringConvertible {
+  case failedRequest(Swift.Int, Swift.String)
+  case invalidAPIVersion(Swift.String)
+  case missingResponse
+  public var description: Swift.String {
+    get
+  }
+}
+extension DPSDK.GatewayRegion : Swift.Equatable {}
+extension DPSDK.GatewayRegion : Swift.Hashable {}
+extension DPSDK.GatewayRegion : Swift.RawRepresentable {}
+extension DPSDK.Gateway3DSecureError : Swift.Equatable {}
+extension DPSDK.Gateway3DSecureError : Swift.Hashable {}
+extension DPSDK.WarningLevel : Swift.Equatable {}
+extension DPSDK.WarningLevel : Swift.Hashable {}
+extension DPSDK.WarningLevel : Swift.RawRepresentable {}
+extension DPSDK.HTTPMethod : Swift.Equatable {}
+extension DPSDK.HTTPMethod : Swift.Hashable {}
+extension DPSDK.HTTPMethod : Swift.RawRepresentable {}
